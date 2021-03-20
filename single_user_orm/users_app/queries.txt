@@ -1,0 +1,37 @@
+queries 
+
+
+
+ Query: Create 3 new users
+>>> User.objects.create(first_name="Moe", last_name="Stooge", email_name="xxx", age="40")
+<User: User object (1)>
+>>> User.objects.create(first_name="Larry", last_name="Stooge", email_name="xxx", age="45") 
+<User: User object (2)>
+>>> User.objects.create(first_name="Curly", last_name="Stooge", email_name="xxx", age="35")      
+<User: User object (3)>
+
+ Query: Retrieve all the users
+>>> User.objects.all() 
+<QuerySet [<User: User object (1)>, <User: User object (2)>, <User: User object (3)>]>
+
+ Query: Retrieve the last user
+>>> User.objects.last()    
+<User: User object (3)>
+
+ Query: Retrieve the first user
+>>> User.objects.first()     
+<User: User object (1)>
+
+
+ Query: Change the user with id=3 so their last name is Pancakes.
+>>> User = User.objects.get(id=3)
+>>> User.last_name = "Pancakes"
+>>> User.save()
+
+ Query: Delete the user with id=2 from the database
+>>>instance = User.objects.get(id=2) 
+>>> instance.delete()
+
+ Query: Get all the users, sorted by their first name
+>>> User.objects.all().values('first_name').order_by('first_name')
+<QuerySet [{'first_name': 'Curly'}, {'first_name': 'Moe'}]>
