@@ -1,0 +1,83 @@
+DOJOS AND NINJAS QUERIES
+
+Query: Create 3 new dojos
+
+>>> Dojo.objects.create(name="test1", city="test1", state="TT")
+<Dojo: Dojo object (1)>
+>>> Dojo.objects.create(name="test2", city="test2", state="TT")
+<Dojo: Dojo object (2)>
+>>> Dojo.objects.create(name="test3", city="test3", state="TT")
+<Dojo: Dojo object (3)>
+
+Query: Delete the 3 dojos you just created
+
+>>> Dojo.objects.all().delete()
+(3, {'dojo_ninjas_app.Ninja': 0, 'dojo_ninjas_app.Dojo': 3})
+
+Query: Create 3 more dojos
+
+>>> Dojo.objects.create(name="Super Lab", city="Albequerque", state="NM")
+<Dojo: Dojo object (1)>
+>>> Dojo.objects.create(name="Bada Bing", city="Newark", state="NJ")
+<Dojo: Dojo object (2)>
+>>> Dojo.objects.create(name="Chicken n Spice", city="Joliet", state="IL")
+<Dojo: Dojo object (3)>
+
+Query: Create 3 ninjas that belong to the first dojo
+
+>>> Ninja.objects.create(dojo_id="1", first_name="Walter", last_name="White")
+<Ninja: Ninja object (1)>
+>>> Ninja.objects.create(dojo_id="1", first_name="Jesse", last_name="Pinkman")
+<Ninja: Ninja object (2)>
+>>> Ninja.objects.create(dojo_id="1", first_name="Gus", last_name="Fring")
+<Ninja: Ninja object (3)>
+
+Query: Create 3 ninjas that belong to the second dojo
+
+>>> Ninja.objects.create(dojo_id="2", first_name="Paulie", last_name="Walnuts")
+<Ninja: Ninja object (4)>
+>>> Ninja.objects.create(dojo_id="2", first_name="Tony", last_name="Soprano")
+<Ninja: Ninja object (5)>
+>>> Ninja.objects.create(dojo_id="2", first_name="Uncle", last_name="June")
+<Ninja: Ninja object (6)>
+
+Query: Create 3 ninjas that belong to the third dojo
+
+>>> Ninja.objects.create(dojo_id="3", first_name="Manny", last_name="Pep")
+<Ninja: Ninja object (7)>
+>>> Ninja.objects.create(dojo_id="3", first_name="Moe", last_name="Pep")
+<Ninja: Ninja object (8)>
+>>> Ninja.objects.create(dojo_id="3", first_name="Jack", last_name="Pep")
+<Ninja: Ninja object (9)>
+
+Query: Retrieve all the ninjas from the first dojo
+
+>>> dojo = Dojo.objects.get(id="1")
+>>> for ninja in dojo.ninjas.all():
+...     print(ninja.first_name)
+...
+Walter
+Jesse
+Gus
+
+Query: Retrieve all the ninjas from the last dojo
+
+>>> dojo = Dojo.objects.get(id="3")
+>>> for ninja in dojo.ninjas.all():
+...     print(ninja.first_name)
+...
+Manny
+Moe
+Jack
+
+Query: Retrieve the last ninja's dojo
+
+>>> last_ninja = Ninja.objects.last()
+>>> last_ninja.dojo_id.name
+'Chicken n Spice'
+
+Query: Create a new dojo
+
+>>> Dojo.objects.create(name = "Fishtown Pizza", city = "Philly", state = "PA")
+
+Submit your .txt file that contains all the queries you ran in the shell
