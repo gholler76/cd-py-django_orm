@@ -1,0 +1,30 @@
+* {
+padding: 0;
+margin: 0;
+box-sizing: border-box;
+border: 1px dashed pink;
+font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+}
+
+html, body {
+    background-color: darkgrey;
+}
+
+h1 {
+    color: #007bff;
+    }
+
+.table th {
+    padding: 0;
+    }
+
+.tbody {
+    max-height: 10rem;
+    overflow: auto;
+    }
+
+.rh {
+    padding: 0 .25rem;
+    font-size: small;
+    line-height: .25;
+}

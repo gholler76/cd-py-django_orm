@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+{% endblock head %}
+
+{% block title %}
+{{ block.super }} - Author Info
+{% endblock title %}
+
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row justify-content-start ml-4 mt-4">
+        <ul>
+            <h1>{{ author.first_name }} {{ author.last_name }}</h1>
+            <h2>ID: {{ author.id }}</h2>
+            <h2>Notes: </h2>
+            <p> {{ author.notes }}</p>
+            <h2>Books:</h2>
+            <ul>
+                {% for book in author.books.all %}
+                <li>
+                    <h4>{{ book.title }}</h4>
+                </li>
+                {% endfor %}
+            </ul>
+        </ul>
+    </div>
+    <div class="row justify-content-start ml-4 mt-4">
+        <div class="col-4">
+            <form action="/assign_book/{{ author.id }}" method="POST" class="form-inline">
+                {% csrf_token %}
+                <select name="book_id" class="form-inline">
+                    <option value="0">Select One</option>
+                    {% for book in books %}
+                    <option value="{{ book.id }}">{{ book.title }}</option>
+                    {% endfor %}
+                </select>
+                <button type="submit" class="btn btn-secondary ml-4">Add Book to this Author</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock content %}

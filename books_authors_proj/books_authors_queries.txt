@@ -1,0 +1,116 @@
+BOOKS AND AUTHORS QUERIES
+
+ Query: Create 5 books with the following names: C Sharp, Java, Python, PHP, Ruby
+
+>>> Book.objects.create(title = "C Sharp")
+<Book: C Sharp>
+>>> Book.objects.create(title = "Java")
+<Book: Java>
+>>> Book.objects.create(title = "Python")
+<Book: Python>
+>>> Book.objects.create(title = "PHP")
+<Book: PHP>
+>>> Book.objects.create(title = "Ruby")
+<Book: Ruby>
+
+ Query: Create 5 different authors: Jane Austen, Emily Dickinson, Fyodor Dostoevsky, William Shakespeare, Lau Tzu
+
+>>> Author.objects.create(first_name = "Jane", last_name = "Austen")
+<Author: Jane Austen>
+>>> Author.objects.create(first_name = "Emily", last_name = "Dickinson")
+<Author: Emily Dickinson>
+>>> Author.objects.create(first_name = "Fyodor", last_name = "Dostoevsky")
+<Author: Fyodor Dostoevsky>
+>>> Author.objects.create(first_name = "William", last_name = "Shakespeare")
+<Author: William Shakespeare>
+>>> Author.objects.create(first_name = "Lau", last_name = "Tzu")
+<Author: Lau Tzu>
+
+ Query: Change the name of the C Sharp book to C#
+
+>>> new_title = Book.objects.filter(id = 1)
+>>> new_title.update(title = "C#")
+1
+>>> Book.objects.values()
+<QuerySet [{'id': 1, 'title': 'C#'
+
+ Query: Change the first name of the 4th author to Bill
+>>> Author.objects.filter(id = 4).update(first_name = "Bill")
+1
+>>> Author.objects.filter(id = 4).values()
+<QuerySet [{'id': 4, 'first_name': 'Bill'
+
+ Query: Assign the first author to the first 2 books
+
+>>> this_book = Book.objects.get(id=1)
+>>> assign_author = Author.objects.get(id=1)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=2)
+>>> this_book.authors.add(assign_author)
+
+ Query: Assign the second author to the first 3 books
+
+>>> assign_author = Author.objects.get(id=2)
+>>> this_book = Book.objects.get(id=1)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=2)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=3)
+>>> this_book.authors.add(assign_author)
+
+ Query: Assign the third author to the first 4 books
+
+>>> this_book = Book.objects.get(id=3)
+>>> this_book.authors.add(assign_author)
+>>> assign_author = Author.objects.get(id=3)
+>>> this_book = Book.objects.get(id=1)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=2)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=3)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=4)
+>>> this_book.authors.add(assign_author)
+
+ Query: Assign the fourth author to the first 5 books (or in other words, all the books)
+
+>>> assign_author = Author.objects.get(id=4)
+>>> this_book = Book.objects.get(id=1)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=2)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=3)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=4)
+>>> this_book.authors.add(assign_author)
+>>> this_book = Book.objects.get(id=5)
+>>> this_book.authors.add(assign_author)
+
+ Query: Retrieve all the authors for the 3rd book
+
+>>> this_book.authors.values("last_name")
+<QuerySet [{'last_name': 'Dickinson'}, {'last_name': 'Dostoevsky'}, {'last_name': 'Shakespeare'}]>
+
+ Query: Remove the first author of the 3rd book
+
+>>> this_book = Book.objects.get(id=3)
+>>> assign_author = Author.objects.get(id=1)
+>>> this_book.authors.remove(assign_author)
+
+ Query: Add the 5th author as one of the authors of the 2nd book
+
+>>> this_book = Book.objects.get(id=2)
+>>> assign_author = Author.objects.get(id=5)
+>>> this_book.authors.add(assign_author)
+
+ Query: Find all the books that the 3rd author is part of
+
+author = Author.objects.get(id=3)
+>>> author.books.values("title")
+<QuerySet [{'title': 'C#'}, {'title': 'Java'}, {'title': 'Python'}, {'title': 'PHP'}]>
+
+ Query: Find all the authors that contributed to the 5th book
+>>> this_book = Book.objects.get(id=5)
+>>> this_book.authors.values("last_name")
+<QuerySet [{'last_name': 'Shakespeare'}]>
+
