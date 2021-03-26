@@ -53,7 +53,14 @@
                     {% endfor %}
                 </tbody>
             </table>
-
+            <form action="/authors" method="post">
+                {% csrf_token %}
+                <input type=" text" name="filter_author">
+                <button type="submit">filter</button>
+            </form>
+            {% for author in filtered_authors %}
+            <p>{{ author }}</p>
+            {% endfor %}
         </div>
     </div>
 </div>

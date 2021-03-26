@@ -19,11 +19,15 @@ def add_book(request):
 
 
 def authors(request):
-    authors = Author.objects.all()
-    context = {
-        "authors": authors
-    }
-    return render(request, "authors.html", context)
+    if 'GET' in request.method:
+        return render(request, "authors.html")
+    else:
+        authors = Author.objects.exclude(
+            first_name__contains=request.POST['filter_author'])
+        context = {
+            "authors": authors
+        }
+        return render(request, "authors.html", context)
 
 
 def add_author(request):

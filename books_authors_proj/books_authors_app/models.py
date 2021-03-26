@@ -6,6 +6,7 @@ class Book(models.Model):
     desc = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+    # authors is related name to Author
 
     def __str__(self):
         return self.title
@@ -19,5 +20,5 @@ class Author(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
-    def __str__(self):
-        return self.first_name + " " + self.last_name
+    # def __str__(self):
+    #     return self.first_name + " " + self.last_name
