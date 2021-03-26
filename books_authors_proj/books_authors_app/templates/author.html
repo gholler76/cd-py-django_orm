@@ -35,7 +35,9 @@
                 <select name="book_id" class="form-inline">
                     <option value="0">Select One</option>
                     {% for book in books %}
+                    {% if book not in author.books.all %}
                     <option value="{{ book.id }}">{{ book.title }}</option>
+                    {% endif %}
                     {% endfor %}
                 </select>
                 <button type="submit" class="btn btn-secondary ml-4">Add Book to this Author</button>
